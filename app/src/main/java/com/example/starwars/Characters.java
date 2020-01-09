@@ -19,26 +19,48 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Characters extends AppCompatActivity implements CharacterAdapterActivity.OnItemClickListener {
-    public static final String EXTRA_IMAGE = "characterImage";
-    public static final String EXTRA_NAME = "characterName";
+    public static final String EXTRA_NAME = "name";
+    public static final String EXTRA_HEIGHT = "height";
+    public static final String EXTRA_MASS = "mass";
     public static final String EXTRA_GENDER = "gender";
-//    public static final String EXTRA_HOMEWORLD = "homeWorld";
-    public static final String EXTRA_EYE = "eye";
-    public static final String EXTRA_HAIR = "hair";
-    public static final String EXTRA_SKIN = "skin";
-//    public static final String EXTRA_BIRTH_YEAR = "birthYear";
-//    public static final String EXTRA_BIRTH_PLACE = "birthPlace";
-//    public static final String EXTRA_DIED_AGE = "diedAge";
-//    public static final String EXTRA_DIED_PLACE = "diedPlace";
-//    public static final String EXTRA_AFFILIATION = "affiliation";
-//    public static final String EXTRA_MASTER = "master";
-//    public static final String EXTRA_APPRENTICE = "apprentice";
+    public static final String EXTRA_HOMEWORLD = "homeworld";
+    public static final String EXTRA_WIKI = "wiki";
+    public static final String EXTRA_IMAGE = "image";
+    public static final String EXTRA_BORN = "born";
+    public static final String EXTRA_BORN_LOCATION = "bornLocation";
+    public static final String EXTRA_DIED = "died";
+    public static final String EXTRA_DIED_LOCATION = "diedLocation";
+    public static final String EXTRA_SPECIES = "species";
+    public static final String EXTRA_HAIRCOLOR = "hairColor";
+    public static final String EXTRA_EYECOLOR = "eyeColor";
+    public static final String EXTRA_SKINCOLOR = "skinColor";
+    public static final String EXTRA_CYBERNETICS = "cybernetics";
+    public static final String EXTRA_AFFILIATIONS = "affiliations";
+//    public static final String EXTRA_MASTERS = "masters";
+//    public static final String EXTRA_APPRENTICES = "apprentices";
+//    public static final String EXTRA_FORMER_AFFILIATIONS = "formerAffiliations";
+    public static final String EXTRA_DATE_CREATED = "dateCreated";
+    public static final String EXTRA_DATE_DESTROYED = "dateDestroyed";
+    public static final String EXTRA_DESTROYED_LOCATION = "destroyedLocation";
+    public static final String EXTRA_CREATOR = "creator";
+    public static final String EXTRA_MANUFACTURER = "manufacturer";
+    public static final String EXTRA_MODEL= "model";
+    public static final String EXTRA_CLASS = "_class";
+    public static final String EXTRA_SENSORCOLOR= "sensorColor";
+    public static final String EXTRA_PLATINGCOLOR= "platingColor";
+//    public static final String EXTRA_EQUIPMENT = "equipment";
+    public static final String EXTRA_PRODUCTLINE = "productLine";
+    public static final String EXTRA_KAJIDIC = "kajidic";
+//    public static final String EXTRA_ERA= "era";
+    public static final String EXTRA_DEGREE= "degree";
+    public static final String EXTRA_ARMAMENT = "armament";
 
     private RecyclerView mRecycleView;
     private CharacterAdapterActivity mCharacterAdapter;
-    private ArrayList<CharactersActivity> mCharacterList;
+    private ArrayList<Datum> mCharacterList;
     private RequestQueue mRequestQueue;
 
     @Override
@@ -66,27 +88,50 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
 
-                            for(int i = 0; i < jsonArray.length(); i++){
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
 
-                                String characterName = object.getString("name");
-                                String characterImage = object.getString("image");
-                                String gender = object.getString("gender");
-//                                String homeworld = object.getString("homeworld");
-                                String eye = object.getString("eyeColor");
-//                                String hair = object.getString("hairColor");
-//                                String skin = object.getString("skinColor");
-//                                int birthYear = object.getInt("born");
-//                                String birthPlace = object.getString("bornLocation");
-//                                int diedAge = object.getInt("died");
-//                                String diedPlace = object.getString("diedLocation");
-//                                String affiliation = object.getString("affiliations");
-//                                String master = object.getString("masters");
-//                                String apprentice = object.getString("apprentices");
+                                Integer id = object.getInt("id");
+                                String name = object.getString("name");
+                                Integer height = object.optInt("height");
+                                Integer mass = object.optInt("mass");
+                                String gender = object.optString("gender");
+                                String homeworld = object.optString("homeworld");
+                                String wiki = object.optString("wiki");
+                                String image = object.getString("image");
+                                Integer born = object.optInt("born");
+                                String bornLocation = object.optString("bornLocation");
+                                Integer died = object.optInt("died");
+                                String diedLocation = object.optString("diedLocation");
+                                String species = object.optString("species");
+                                String hairColor = object.optString("hairColor");
+                                String eyeColor = object.optString("eyeColor");
+                                String skinColor = object.optString("skinColor");
+                                String cybernetics = object.optString("cybernetics");
+//                                List<String> affiliations = object.getJSONArray("affiliations").getString("0");
+//                                List<String> masters = object.getString("masters");
+//                                List<String> apprentices = object.getString("apprentices");
+//                                List<String> formerAffiliations = object.getString("formerAffiliations");
+                                Integer dateCreated = object.optInt("dateCreated");
+                                Integer dateDestroyed = object.optInt("dateDestroyed");
+                                String destroyedLocation = object.optString("destroyedLocation");
+                                String creator = object.optString("creator");
+                                String manufacturer = object.optString("manufacturer");
+                                String model = object.optString("model");
+                                String _class = object.optString("_class");
+                                String sensorColor = object.optString("sensorColor");
+                                String platingColor = object.optString("platingColor");
+//                                List<String> equipment = object.getString("equipment");
+                                String productLine = object.optString("productLine");
+                                String kajidic = object.optString("kajidic");
+//                                List<String> era = object.getString("era");
+                                String degree = object.optString("degree");
+                                String armament = object.optString("armament");
 
-                                mCharacterList.add(new CharactersActivity(characterImage, characterName, gender, eye));
+
+                                mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
                             }
-//                           , homeworld, birthYear, birthPlace, diedAge, diedPlace, affiliation, master, apprentice, hair, skin
+//                            affiliations, masters, apprentices, formerAffiliations,,  era, equipment
                             mCharacterAdapter = new CharacterAdapterActivity(Characters.this, mCharacterList);
                             mRecycleView.setAdapter(mCharacterAdapter);
 
@@ -96,11 +141,11 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                             e.printStackTrace();
                         }
                     }
-                }, new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error){
-                        error.printStackTrace();
-                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
         });
 
         mRequestQueue.add(request);
@@ -109,22 +154,43 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
     @Override
     public void onItemClick(int position) {
         Intent intent = new Intent(this, DetailsActivity.class);
-        CharactersActivity itemClicked = mCharacterList.get(position);
+        Datum itemClicked = mCharacterList.get(position);
 
-        intent.putExtra(EXTRA_IMAGE, itemClicked.getCharacterImage());
-        intent.putExtra(EXTRA_NAME, itemClicked.getCharacterName());
+        intent.putExtra(EXTRA_NAME, itemClicked.getName());
+        intent.putExtra(EXTRA_HEIGHT, itemClicked.getHeight());
+        intent.putExtra (EXTRA_MASS, itemClicked.getMass());
         intent.putExtra(EXTRA_GENDER, itemClicked.getGender());
-//        intent.putExtra(EXTRA_HOMEWORLD, itemClicked.getHomeWorld());
-        intent.putExtra(EXTRA_EYE, itemClicked.getEye());
-//        intent.putExtra(EXTRA_HAIR, itemClicked.getHair());
-//        intent.putExtra(EXTRA_SKIN, itemClicked.getSkin());
-//        intent.putExtra(EXTRA_BIRTH_YEAR, itemClicked.getBirthYear());
-//        intent.putExtra(EXTRA_BIRTH_PLACE, itemClicked.getBirthPlace());
-//        intent.putExtra(EXTRA_DIED_AGE, itemClicked.getDiedAge());
-//        intent.putExtra(EXTRA_DIED_PLACE, itemClicked.getDiedPlace());
-//        intent.putExtra(EXTRA_AFFILIATION, itemClicked.getAffiliation());
-//        intent.putExtra(EXTRA_MASTER, itemClicked.getMaster());
-//        intent.putExtra(EXTRA_APPRENTICE, itemClicked.getApprentice());
+        intent.putExtra(EXTRA_HOMEWORLD, itemClicked.getHomeworld());
+        intent.putExtra (EXTRA_WIKI, itemClicked.getWiki());
+        intent.putExtra(EXTRA_IMAGE, itemClicked.getImage());
+        intent.putExtra(EXTRA_BORN, itemClicked.getBorn());
+        intent.putExtra(EXTRA_BORN_LOCATION, itemClicked.getBornLocation() );
+        intent.putExtra (EXTRA_DIED, itemClicked.getMass());
+        intent.putExtra(EXTRA_DIED_LOCATION, itemClicked.getDiedLocation());
+        intent.putExtra(EXTRA_SPECIES, itemClicked.getSpecies());
+        intent.putExtra (EXTRA_HAIRCOLOR, itemClicked.getHairColor());
+        intent.putExtra(EXTRA_EYECOLOR, itemClicked.getEyeColor());
+        intent.putExtra(EXTRA_SKINCOLOR, itemClicked.getSkinColor());
+        intent.putExtra(EXTRA_CYBERNETICS, itemClicked.getCybernetics() );
+//        intent.putExtra (EXTRA_AFFILIATIONS, itemClicked.getAffiliations());
+//        intent.putExtra(EXTRA_MASTERS, itemClicked.getMasters());
+//        intent.putExtra(EXTRA_APPRENTICES, itemClicked.getApprentices());
+//        intent.putExtra (EXTRA_FORMER_AFFILIATIONS, itemClicked.getFormerAffiliations());
+        intent.putExtra(EXTRA_DATE_CREATED, itemClicked.getDateCreated());
+        intent.putExtra(EXTRA_DATE_DESTROYED, itemClicked.getDateDestroyed());
+        intent.putExtra(EXTRA_DESTROYED_LOCATION, itemClicked.getDestroyedLocation());
+        intent.putExtra (EXTRA_CREATOR, itemClicked.getCreator());
+        intent.putExtra(EXTRA_MANUFACTURER, itemClicked.getManufacturer());
+        intent.putExtra(EXTRA_MODEL, itemClicked.getModel());
+        intent.putExtra (EXTRA_CLASS, itemClicked.getClass_());
+        intent.putExtra(EXTRA_SENSORCOLOR, itemClicked.getSensorColor());
+        intent.putExtra(EXTRA_PLATINGCOLOR, itemClicked.getPlatingColor());
+//        intent.putExtra(EXTRA_EQUIPMENT, itemClicked.getEquipment() );
+        intent.putExtra (EXTRA_PRODUCTLINE, itemClicked.getProductLine());
+        intent.putExtra(EXTRA_KAJIDIC, itemClicked.getKajidic());
+//        intent.putExtra(EXTRA_ERA, itemClicked.getEra());
+        intent.putExtra (EXTRA_DEGREE, itemClicked.getDegree());
+        intent.putExtra(EXTRA_ARMAMENT, itemClicked.getArmament());
 
         startActivity(intent);
     }

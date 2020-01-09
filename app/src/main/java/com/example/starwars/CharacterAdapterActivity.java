@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdapterActivity.CharacterViewHolder> {
     private Context mContext;
-    private ArrayList<CharactersActivity> mCharacterList;
+    private ArrayList<Datum> mCharacterList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
@@ -28,7 +29,7 @@ public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdap
         mListener = listener;
     }
 
-    public CharacterAdapterActivity(Context context, ArrayList<CharactersActivity> characterList){
+    public CharacterAdapterActivity(Context context, ArrayList<Datum> characterList){
         mContext = context;
         mCharacterList = characterList;
     }
@@ -42,26 +43,49 @@ public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdap
 
     @Override
     public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
-        CharactersActivity currentItem = mCharacterList.get(position);
+        Datum currentItem = mCharacterList.get(position);
 
-        String characterImage = currentItem.getCharacterImage();
-        String characterName = currentItem.getCharacterName();
+        String name = currentItem.getName();
+//        int height = currentItem.getHeight();
+//        Integer mass = currentItem.getMass();
 //        String gender = currentItem.getGender();
-//        String homeworld = currentItem.getHomeWorld();
-//        String eye = currentItem.getEye();
-//        String hair = currentItem.getHair();
-//        String skin = currentItem.getSkin();
-//        int birthYear = currentItem.getBirthYear();
-//        String birthPlace = currentItem.getBirthPlace();
-//        int diedAge = currentItem.getDiedAge();
-//        String diedPlace = currentItem.getDiedPlace();
-//        String affiliation = currentItem.getAffiliation();
-//        String master = currentItem.getMaster();
-//        String apprentice = currentItem.getApprentice();
+//        String homeworld = currentItem.getHomeworld();
+//        String wiki = currentItem.getWiki();
+        String image = currentItem.getImage();
+//        Integer born = currentItem.getBorn();
+//        String bornLocation = currentItem.getBornLocation();
+//        Integer died = currentItem.getDied();
+//        String diedLocation = currentItem.getDiedLocation();
+//        String species = currentItem.getSpecies();
+//        String hairColor = currentItem.getHairColor();
+//        String eyeColor = currentItem.getEyeColor();
+//        String skinColor = currentItem.getSkinColor();
+//        String cybernetics = currentItem.getCybernetics();
+//        List<String> affiliations = currentItem.getAffiliations();
+//        List<String> masters = currentItem.getMasters();
+//        List<String> apprentices = currentItem.getApprentices();
+//        List<String> formerAffiliations = currentItem.getFormerAffiliations();
+//        Integer dateCreated = currentItem.getDateCreated();
+//        Integer dateDestroyed = currentItem.getDateDestroyed();
+//        String destroyedLocation = currentItem.getDestroyedLocation();
+//        String creator = currentItem.getCreator();
+//        String manufacturer = currentItem.getManufacturer();
+//        String model = currentItem.getModel();
+//        String _class = currentItem.getClass_();
+//        String sensorColor = currentItem.getSensorColor();
+//        String platingColor = currentItem.getPlatingColor();
+//        List<String> equipment = currentItem.getEquipment();
+//        String productLine = currentItem.getProductLine();
+//        String kajidic = currentItem.getKajidic();
+//        List<String> era = currentItem.getEra();
+//        String degree = currentItem.getDegree();
+//        String armament = currentItem.getArmament();
 
 
-        holder.mTextViewCharacterName.setText(characterName);
-        Picasso.get().load(characterImage).fit().centerCrop().into(holder.mImageView);
+
+        holder.mTextViewCharacterName.setText(name);
+//        holder.textViewHeight.setText(height);
+        Picasso.get().load(image).fit().centerCrop().into(holder.mImageView);
     }
 
     @Override
@@ -72,6 +96,7 @@ public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdap
     public class CharacterViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public TextView mTextViewCharacterName;
+//        public TextView textViewHeight;
 
         public CharacterViewHolder(View itemView){
             super(itemView);
