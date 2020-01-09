@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <ImageView
+            android:id="@+id/image_view_detail"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@mipmap/ic_launcher"/>
+        <TextView
+            android:id="@+id/text_view_character_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_toRightOf="@id/image_view_detail"
+            android:layout_marginStart="16dp"
+            android:text="Character's Name"
+            android:textColor="@android:color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_toRightOf="@id/image_view_detail"
+            android:layout_below="@id/text_view_character_detail"
+            android:layout_marginStart="16dp"
+            android:text="Gender"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/homeworld"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_below="@id/gender"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:text="Homeworld"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+        <TextView
+            android:id="@+id/eye"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_toRightOf="@id/image_view_detail"
+            android:layout_below="@id/gender"
+            android:layout_marginStart="16dp"
+            android:text="Eye"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/hair"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/eye"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Hair"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/skin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/hair"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Skin"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/birth_year"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/skin"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Birth Year"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/birth_place"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/birth_year"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Birth Place"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/died_age"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/birth_place"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Died"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/died_place"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/died_age"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Died Place"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/affiliation"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/died_place"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Affiliation"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/master"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/affiliation"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Master"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/apprentice"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_toRightOf="@id/image_view_detail"-->
+<!--            android:layout_below="@id/master"-->
+<!--            android:layout_marginStart="16dp"-->
+<!--            android:text="Apprentice"-->
+<!--            android:textColor="@android:color/black"-->
+<!--            android:textSize="20sp" />-->
+    </RelativeLayout>
+
+</LinearLayout>
