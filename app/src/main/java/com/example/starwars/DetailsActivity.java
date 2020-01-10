@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -72,7 +74,7 @@ public class DetailsActivity extends AppCompatActivity {
         String eyeColor = intent.getStringExtra(EXTRA_EYECOLOR);
         String skinColor = intent.getStringExtra(EXTRA_SKINCOLOR);
         String cybenretics = intent.getStringExtra(EXTRA_CYBERNETICS);
-        List<String> affiliations = Collections.singletonList(intent.getStringExtra(EXTRA_AFFILIATIONS));
+        List<String> affiliations = Arrays.asList(intent.getStringExtra(EXTRA_AFFILIATIONS));
 //        String masters = intent.getStringExtra(EXTRA_MASTERS);
 //        String apprentices = intent.getStringExtra(EXTRA_APPRENTICES);
 //        String formerAffliations = intent.getStringExtra(EXTRA_FORMER_AFFILIATIONS);
@@ -108,7 +110,7 @@ public class DetailsActivity extends AppCompatActivity {
         TextView textViewEyeColor = findViewById(R.id.eye);
         TextView textViewSkinColor = findViewById(R.id.skin);
         TextView textViewCyber = findViewById(R.id.cyber);
-//        TextView textViewAffiliations = findViewById(R.id.affiliations);
+        TextView textViewAffiliations = findViewById(R.id.affiliations);
 //        TextView textViewMasters = findViewById(R.id.masters);
 //        TextView textViewApprentices = findViewById(R.id.apprentices);
 //        TextView textViewFormer = findViewById(R.id.former);
@@ -144,7 +146,7 @@ public class DetailsActivity extends AppCompatActivity {
         textViewEyeColor.setText(eyeColor);
         textViewSkinColor.setText(skinColor);
         textViewCyber.setText(cybenretics);
-//        textViewAffiliations.setText((CharSequence) affiliations);
+        textViewAffiliations.setText(affiliations);
 //        textViewMasters.setText(masters);
 //        textViewApprentices.setText(apprentices);
 //        textViewFormer.setText(formerAffliations);

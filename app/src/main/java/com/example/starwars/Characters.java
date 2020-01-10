@@ -88,8 +88,30 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
 
+//                            JSONArray array=jsonObject.getJSONArray("data");
+
+//                            for(int i=0;i<array.length();i++){
+//                                JSONObject o=array.getJSONObject(i);
+//                                List<String> aff=null;
+//
+//                                JSONArray array2=o.getJSONArray("affiliations");
+//
+//                                aff=new ArrayList<String>();
+//                                for(int j=0;j<array2.length();j++){
+//                                    aff.add(array2.getString(j));
+//
+//                                }
+
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
+                                List<String> affiliations = null;
+
+                                JSONArray jsonArrayAff = object.getJSONArray("affiliations");
+
+                                affiliations = new ArrayList<String>();
+                                for(int j = 0; j < jsonArrayAff.length(); j++){
+                                    affiliations.add(jsonArrayAff.getString(j));
+                                }
 
                                 Integer id = object.getInt("id");
                                 String name = object.getString("name");
@@ -108,7 +130,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 String eyeColor = object.optString("eyeColor");
                                 String skinColor = object.optString("skinColor");
                                 String cybernetics = object.optString("cybernetics");
-//                                List<String> affiliations = object.getJSONArray("affiliations").getString("0");
+//                                List<String> affiliations = object.getJSONArray("affiliations");
 //                                List<String> masters = object.getString("masters");
 //                                List<String> apprentices = object.getString("apprentices");
 //                                List<String> formerAffiliations = object.getString("formerAffiliations");
@@ -129,7 +151,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 String armament = object.optString("armament");
 
 
-                                mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
+                                mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, affiliations, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
                             }
 //                            affiliations, masters, apprentices, formerAffiliations,,  era, equipment
                             mCharacterAdapter = new CharacterAdapterActivity(Characters.this, mCharacterList);
@@ -171,8 +193,8 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
         intent.putExtra (EXTRA_HAIRCOLOR, itemClicked.getHairColor());
         intent.putExtra(EXTRA_EYECOLOR, itemClicked.getEyeColor());
         intent.putExtra(EXTRA_SKINCOLOR, itemClicked.getSkinColor());
-        intent.putExtra(EXTRA_CYBERNETICS, itemClicked.getCybernetics() );
-//        intent.putExtra (EXTRA_AFFILIATIONS, itemClicked.getAffiliations());
+        intent.putExtra(EXTRA_CYBERNETICS, itemClicked.getCybernetics());
+        intent.putStringArrayListExtra(EXTRA_AFFILIATIONS, (ArrayList<String>) itemClicked.getAffiliations());
 //        intent.putExtra(EXTRA_MASTERS, itemClicked.getMasters());
 //        intent.putExtra(EXTRA_APPRENTICES, itemClicked.getApprentices());
 //        intent.putExtra (EXTRA_FORMER_AFFILIATIONS, itemClicked.getFormerAffiliations());
