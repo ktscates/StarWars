@@ -1,6 +1,7 @@
 
 package com.example.starwars;
 
+
 import java.util.List;
 
 public class Datum {
@@ -22,7 +23,7 @@ public class Datum {
     private String skinColor;
     private String cybernetics;
     private List<String> affiliations = null;
-//    private List<String> masters = null;
+    //    private List<String> masters = null;
 //    private List<String> apprentices = null;
 //    private List<String> formerAffiliations = null;
     private Integer dateCreated;
@@ -34,22 +35,22 @@ public class Datum {
     private String _class;
     private String sensorColor;
     private String platingColor;
-//    private List<String> equipment = null;
+    //    private List<String> equipment = null;
     private String productLine;
     private String kajidic;
-//    private List<String> era = null;
+    //    private List<String> era = null;
     private String degree;
     private String armament;
 
     /**
      * No args constructor for use in serialization
-     * 
+     *
      */
     public Datum() {
     }
 
     /**
-//     *
+     //     *
      * @param armament
      * @param homeworld
      * @param gender
@@ -57,17 +58,17 @@ public class Datum {
      * @param skinColor
      * @param mass
      * @param wiki
-//     * @param affiliations
-//     * @param masters
+    //     * @param affiliations
+    //     * @param masters
      * @param died
-//     * @param formerAffiliations
+    //     * @param formerAffiliations
      * @param sensorColor
      * @param kajidic
      * @param manufacturer
      * @param productLine
      * @param dateCreated
      * @param eyeColor
-//     * @param era
+    //     * @param era
      * @param model
      * @param id
      * @param hairColor
@@ -78,18 +79,18 @@ public class Datum {
      * @param born
      * @param degree
      * @param diedLocation
-//     * @param equipment
+    //     * @param equipment
      * @param platingColor
      * @param bornLocation
      * @param species
      * @param name
      * @param _class
-//     * @param apprentices
+    //     * @param apprentices
      * @param dateDestroyed
      */
 
-//
-    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, List<String> affiliations, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor, String productLine, String kajidic, String degree, String armament) {
+// List<String> affiliations,
+    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor, String productLine, String kajidic, String degree, String armament) {
         super();
         this.id = id;
         this.name = name;
@@ -265,13 +266,13 @@ public class Datum {
         this.cybernetics = cybernetics;
     }
 
-    public List<String> getAffiliations() {
-        return affiliations;
-    }
-
-    public void setAffiliations(List<String> affiliations) {
-        this.affiliations = affiliations;
-    }
+//    public List<String> getAffiliations() {
+//        return affiliations;
+//    }
+//
+//    public void setAffiliations(List<String> affiliations) {
+//        this.affiliations = affiliations;
+//    }
 
 //    public List<String> getMasters() {
 //        return masters;
