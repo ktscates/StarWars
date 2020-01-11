@@ -2,10 +2,17 @@ package com.example.starwars;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,12 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdapterActivity.CharacterViewHolder> {
-    private Context mContext;
-    private ArrayList<Datum> mCharacterList;
+public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdapterActivity.CharacterViewHolder> implements Filterable {
+
+    private List<Datum> mCharacterList;
+    private List<Datum> charactersList;
     private OnItemClickListener mListener;
 
     public interface OnItemClickListener{
@@ -29,15 +38,15 @@ public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdap
         mListener = listener;
     }
 
-    public CharacterAdapterActivity(Context context, ArrayList<Datum> characterList){
-        mContext = context;
-        mCharacterList = characterList;
+    public CharacterAdapterActivity(List<Datum> characterList){
+        this.mCharacterList = characterList;
+        charactersList = new ArrayList<>(mCharacterList);
     }
 
     @NonNull
     @Override
     public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(mContext).inflate(R.layout.activity_card_view_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_card_view_item, parent, false);
         return new CharacterViewHolder(v);
     }
 
@@ -85,13 +94,49 @@ public class CharacterAdapterActivity extends RecyclerView.Adapter<CharacterAdap
 
         holder.mTextViewCharacterName.setText(name);
 //        holder.textViewHeight.setText(height);
-        Picasso.get().load(image).fit().centerCrop().into(holder.mImageView);
+        Picasso.get().load(image).fit().centerInside().into(holder.mImageView);
     }
 
     @Override
     public int getItemCount() {
         return mCharacterList.size();
     }
+
+    @Override
+    public Filter getFilter(){
+        return characterFilter;
+    }
+
+    private Filter characterFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Datum> filteredCharacters = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredCharacters.addAll(charactersList);
+            } else {
+                String filterCharacter = constraint.toString().toLowerCase().trim();
+
+                for (Datum item : charactersList) {
+                    if (item.getName().toLowerCase().contains(filterCharacter)) {
+                        filteredCharacters.add(item);
+                    }
+                }
+            }
+
+            FilterResults result = new FilterResults();
+            result.values = filteredCharacters;
+
+            return result;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mCharacterList.clear();
+            mCharacterList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class CharacterViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;

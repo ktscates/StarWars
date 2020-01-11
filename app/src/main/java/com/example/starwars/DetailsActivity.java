@@ -15,11 +15,10 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+
 import java.util.List;
-import java.util.Objects;
 
-
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity<KEY_CHARACTERS> extends AppCompatActivity {
     TextView textViewCharacter;
     TextView textViewHeight;
     TextView textViewMass;
@@ -37,6 +36,9 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewSkinColor;
     TextView textViewCyber;
     TextView textViewAffiliations;
+    TextView textViewMasters;
+    TextView textViewApprentices;
+    TextView textViewFormer;
     TextView textViewDateCreated;
     TextView textViewDateDestroyed;
     TextView textViewDestroyed;
@@ -46,13 +48,20 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewClass;
     TextView textViewSensor;
     TextView textViewPlating;
+    TextView textViewEquipment;
     TextView textViewProduct;
     TextView textViewKajidic;
+    TextView textViewEra;
     TextView textViewDegree;
     TextView textViewArmament;
 
     SharedPreferences sharedPreferences;
+    private final String MY_CHARACTERS_KEY = "myCharacters";
+    static final String KEY_NAME = "nameKey";
+    static final String KEY_GENDER = "genderKey";
     Button save;
+    Button load;
+    Button delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,9 +86,9 @@ public class DetailsActivity extends AppCompatActivity {
         String skinColor = intent.getStringExtra("skinColor");
         String cybernetics = intent.getStringExtra("cybernetics");
         List<String> affiliations = intent.getStringArrayListExtra("affialiations");
-//        String masters = intent.getStringExtra(EXTRA_MASTERS);
-//        String apprentices = intent.getStringExtra(EXTRA_APPRENTICES);
-//        String formerAffliations = intent.getStringExtra(EXTRA_FORMER_AFFILIATIONS);
+        String masters = intent.getStringExtra("masters");
+        String apprentices = intent.getStringExtra("apprentices");
+        String formerAffliations = intent.getStringExtra("formerAffiliations");
         Integer dateCreated = intent.getIntExtra("dateCreated",0);
         Integer dateDestroyed = intent.getIntExtra("dateDestroyed",0);
         String destroyedLocation = intent.getStringExtra("destroyedLocation");
@@ -89,10 +98,10 @@ public class DetailsActivity extends AppCompatActivity {
         String _class = intent.getStringExtra("_class");
         String sensorColor = intent.getStringExtra("sensorColor");
         String platingColor = intent.getStringExtra("platingColor");
-//        String equipments = intent.getStringExtra(EXTRA_EQUIPMENT);
+        String equipment = intent.getStringExtra("equipment");
         String productLine = intent.getStringExtra("productLine");
         String kajidic = intent.getStringExtra("kajidic");
-//        String era = intent.getStringExtra(EXTRA_ERA);
+        String era = intent.getStringExtra("era");
         String degree = intent.getStringExtra("degree");
         String armament = intent.getStringExtra("armament");
 
@@ -113,9 +122,9 @@ public class DetailsActivity extends AppCompatActivity {
         textViewSkinColor = findViewById(R.id.skin);
         textViewCyber = findViewById(R.id.cyber);
         textViewAffiliations = findViewById(R.id.affiliations);
-//        TextView textViewMasters = findViewById(R.id.masters);
-//        TextView textViewApprentices = findViewById(R.id.apprentices);
-//        TextView textViewFormer = findViewById(R.id.former);
+        textViewMasters = findViewById(R.id.masters);
+        textViewApprentices = findViewById(R.id.apprentices);
+        textViewFormer = findViewById(R.id.former);
         textViewDateCreated = findViewById(R.id.date_created);
         textViewDateDestroyed = findViewById(R.id.date_destroyed);
         textViewDestroyed = findViewById(R.id.destroyed);
@@ -125,72 +134,106 @@ public class DetailsActivity extends AppCompatActivity {
         textViewClass = findViewById(R.id.class_);
         textViewSensor = findViewById(R.id.sensor);
         textViewPlating = findViewById(R.id.plating);
-//        TextView textViewEquipments = findViewById(R.id.equipments);
+        textViewEquipment = findViewById(R.id.equipments);
         textViewProduct = findViewById(R.id.product);
         textViewKajidic = findViewById(R.id.kajidic);
-//        TextView textViewEra = findViewById(R.id.era);
+        textViewEra = findViewById(R.id.era);
         textViewDegree = findViewById(R.id.degree);
         textViewArmament = findViewById(R.id.armament);
 
         textViewCharacter.setText(name);
         textViewHeight.setText("Height: " + height);
         textViewMass.setText("Mass: " + mass);
-        textViewGender.setText(gender);
-        textViewHomeworld.setText(homeworld);
-        textViewWiki.setText(wiki);
+        textViewGender.setText("Gender: " + gender);
+        textViewHomeworld.setText("Homeworld: " + homeworld);
+        textViewWiki.setText("Wiki: " + wiki);
         Picasso.get().load(image).fit().centerCrop().into(imageView);
         textViewBorn.setText("Born: " + born);
-        textViewBornLocation.setText(bornLocation);
+        textViewBornLocation.setText("Born location: " + bornLocation);
         textViewDied.setText("Died: " + died);
-        textViewDiedLocation.setText(diedLocation);
-        textViewSpecies.setText(species);
-        textViewHaircolor.setText(hairColor);
-        textViewEyeColor.setText(eyeColor);
-        textViewSkinColor.setText(skinColor);
-        textViewCyber.setText(cybernetics);
+        textViewDiedLocation.setText("Died Location: " + diedLocation);
+        textViewSpecies.setText("Species: " + species);
+        textViewHaircolor.setText("Hair Color: " + hairColor);
+        textViewEyeColor.setText("Eye color: " + eyeColor);
+        textViewSkinColor.setText("Skin color: " + skinColor);
+        textViewCyber.setText("Cybernetics: " + cybernetics);
 
         StringBuilder affiliate = new StringBuilder();
         if (affiliations != null) {
-            for (int i = 0; i < affiliations.size(); i++) {
-                affiliate.append(affiliations.get(i)).append("\n");
+            for (int j = 0; j < affiliations.size(); j++) {
+                affiliate.append(affiliations.get(j)).append("\n");
             }
         }
         textViewAffiliations.setText("Affiliations: " + affiliate);
         System.out.println(affiliate);
-//        textViewMasters.setText(masters);
-//        textViewApprentices.setText(apprentices);
-//        textViewFormer.setText(formerAffliations);
+
+//        StringBuilder master = new StringBuilder();
+//        if(masters != null) {
+//            for (int j = 0; j < masters.size(); j++) {
+//                master.append(masters.get(j)).append("\n");
+//            }
+//        }
+        textViewMasters.setText("Masters: " + masters);
+//        System.out.println(master);
+        textViewApprentices.setText("Apprentices: " + apprentices);
+        textViewFormer.setText("Former Affiliations: " + formerAffliations);
         textViewDateCreated.setText("Date created: " + dateCreated);
         textViewDateDestroyed.setText("Date destroyed: " + dateDestroyed);
-        textViewDestroyed.setText(destroyedLocation);
-        textViewCreator.setText(creator);
-        textViewManufacturer.setText(manufacturer);
-        textViewModel.setText(model);
-        textViewClass.setText(_class);
-        textViewSensor.setText(sensorColor);
-        textViewPlating.setText(platingColor);
-//        textViewEquipments.setText(equipments);
-        textViewProduct.setText(productLine);
-        textViewKajidic.setText(kajidic);
-//        textViewEra.setText(era);
-        textViewDegree.setText(degree);
-        textViewArmament.setText(armament);
+        textViewDestroyed.setText("Destroyed location: " + destroyedLocation);
+        textViewCreator.setText("Creator: " + creator);
+        textViewManufacturer.setText("Manufacturer: " + manufacturer);
+        textViewModel.setText("Model: " + model);
+        textViewClass.setText("Class: " + _class);
+        textViewSensor.setText("Sensor color: " + sensorColor);
+        textViewPlating.setText("Plating color: " + platingColor);
+        textViewEquipment.setText("Equipment: " + equipment);
+        textViewProduct.setText("Product line: " + productLine);
+        textViewKajidic.setText("Kajidic: " + kajidic);
+        textViewEra.setText("Era: " + era);
+        textViewDegree.setText("Degree: " + degree);
+        textViewArmament.setText("Armament: " + armament);
 
         save = findViewById(R.id.save);
+        load = findViewById(R.id.load);
+        delete = findViewById(R.id.delete);
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sharedPreferences = getSharedPreferences("com.example.starwars", Context.MODE_PRIVATE);
+//                   writeFileOnInternalStorage();
+                sharedPreferences = getSharedPreferences(MY_CHARACTERS_KEY, Context.MODE_PRIVATE);
                 String characterName = textViewCharacter.getText().toString();
                 String characterGender = textViewGender.getText().toString();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("characterName", characterName);
-                editor.putString("characterGender", characterGender);
+                editor.putString(KEY_NAME, characterName);
+                editor.putString(KEY_GENDER, characterGender);
                 editor.commit();
                 Toast.makeText(DetailsActivity.this, characterName + "Has been Saved", Toast.LENGTH_LONG).show();
                 System.out.println(characterName);
                 System.out.println(characterGender);
+            }
+
+        });
+
+        load.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPreferences = getSharedPreferences(MY_CHARACTERS_KEY, Context.MODE_PRIVATE);
+
+                if(sharedPreferences.contains(KEY_NAME)){
+                    textViewCharacter.setText(sharedPreferences.getString(KEY_NAME, ""));
+                }
+                if(sharedPreferences.contains(KEY_GENDER)){
+                    textViewGender.setText(sharedPreferences.getString(KEY_GENDER, ""));
+                }
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textViewCharacter.setText("");
+                textViewGender.setText("");
             }
         });
     }

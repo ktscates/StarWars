@@ -23,9 +23,9 @@ public class Datum {
     private String skinColor;
     private String cybernetics;
     private List<String> affiliations = null;
-    //    private List<String> masters = null;
-//    private List<String> apprentices = null;
-//    private List<String> formerAffiliations = null;
+    private List<String> masters = null;
+    private List<String> apprentices = null;
+    private List<String> formerAffiliations = null;
     private Integer dateCreated;
     private Integer dateDestroyed;
     private String destroyedLocation;
@@ -35,10 +35,10 @@ public class Datum {
     private String _class;
     private String sensorColor;
     private String platingColor;
-    //    private List<String> equipment = null;
+    private List<String> equipment = null;
     private String productLine;
     private String kajidic;
-    //    private List<String> era = null;
+    private List<String> era = null;
     private String degree;
     private String armament;
 
@@ -58,10 +58,10 @@ public class Datum {
      * @param skinColor
      * @param mass
      * @param wiki
-    //     * @param affiliations
-    //     * @param masters
+//         * @param affiliations
+//         * @param masters
      * @param died
-    //     * @param formerAffiliations
+//         * @param formerAffiliations
      * @param sensorColor
      * @param kajidic
      * @param manufacturer
@@ -90,7 +90,7 @@ public class Datum {
      */
 
 //
-    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, List<String> affiliations, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor, String productLine, String kajidic, String degree, String armament) {
+    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, List<String> affiliations, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor,  String productLine, String kajidic, String degree, String armament) {
         super();
         this.id = id;
         this.name = name;
@@ -109,10 +109,10 @@ public class Datum {
         this.eyeColor = eyeColor;
         this.skinColor = skinColor;
         this.cybernetics = cybernetics;
-//        this.affiliations = affiliations;
-//        this.masters = masters;
-//        this.apprentices = apprentices;
-//        this.formerAffiliations = formerAffiliations;
+        this.affiliations = affiliations;
+        this.masters = masters;
+        this.apprentices = apprentices;
+        this.formerAffiliations = formerAffiliations;
         this.dateCreated = dateCreated;
         this.dateDestroyed = dateDestroyed;
         this.destroyedLocation = destroyedLocation;
@@ -122,10 +122,10 @@ public class Datum {
         this._class = _class;
         this.sensorColor = sensorColor;
         this.platingColor = platingColor;
-//        this.equipment = equipment;
+        this.equipment = equipment;
         this.productLine = productLine;
         this.kajidic = kajidic;
-//        this.era = era;
+        this.era = era;
         this.degree = degree;
         this.armament = armament;
     }
@@ -274,29 +274,29 @@ public class Datum {
         this.affiliations = affiliations;
     }
 
-//    public List<String> getMasters() {
-//        return masters;
-//    }
-//
-//    public void setMasters(List<String> masters) {
-//        this.masters = masters;
-//    }
-//
-//    public List<String> getApprentices() {
-//        return apprentices;
-//    }
-//
-//    public void setApprentices(List<String> apprentices) {
-//        this.apprentices = apprentices;
-//    }
-//
-//    public List<String> getFormerAffiliations() {
-//        return formerAffiliations;
-//    }
-//
-//    public void setFormerAffiliations(List<String> formerAffiliations) {
-//        this.formerAffiliations = formerAffiliations;
-//    }
+    public List<String> getMasters() {
+        return masters;
+    }
+
+    public void setMasters(List<String> masters) {
+        this.masters = masters;
+    }
+
+    public List<String> getApprentices() {
+        return apprentices;
+    }
+
+    public void setApprentices(List<String> apprentices) {
+        this.apprentices = apprentices;
+    }
+
+    public List<String> getFormerAffiliations() {
+        return formerAffiliations;
+    }
+
+    public void setFormerAffiliations(List<String> formerAffiliations) {
+        this.formerAffiliations = formerAffiliations;
+    }
 
     public Integer getDateCreated() {
         return dateCreated;
@@ -370,14 +370,14 @@ public class Datum {
         this.platingColor = platingColor;
     }
 
-//    public List<String> getEquipment() {
-//        return equipment;
-//    }
-//
-//    public void setEquipment(List<String> equipment) {
-//        this.equipment = equipment;
-//    }
-//
+    public List<String> getEquipment() {
+        return equipment;
+    }
+
+    public void setEquipment(List<String> equipment) {
+        this.equipment = equipment;
+    }
+
     public String getProductLine() {
         return productLine;
     }
@@ -394,13 +394,13 @@ public class Datum {
         this.kajidic = kajidic;
     }
 
-//    public List<String> getEra() {
-//        return era;
-//    }
-//
-//    public void setEra(List<String> era) {
-//        this.era = era;
-//    }
+    public List<String> getEra() {
+        return era;
+    }
+
+    public void setEra(List<String> era) {
+        this.era = era;
+    }
 
     public String getDegree() {
         return degree;

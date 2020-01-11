@@ -2,9 +2,15 @@ package com.example.starwars;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
@@ -26,7 +32,8 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
 
     private RecyclerView mRecycleView;
     private CharacterAdapterActivity mCharacterAdapter;
-    private ArrayList<Datum> mCharacterList;
+//    private Context mContext;
+    private List<Datum> mCharacterList;
     private RequestQueue mRequestQueue;
 
     @Override
@@ -36,8 +43,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
 
         mRecycleView = findViewById(R.id.recycle_view);
         mRecycleView.setHasFixedSize(true);
-        mRecycleView.setLayoutManager(new GridLayoutManager(this, 2));
-
+        mRecycleView.setLayoutManager(new GridLayoutManager(this,2));
         mCharacterList = new ArrayList<>();
 
         mRequestQueue = Volley.newRequestQueue(this);
@@ -58,6 +64,11 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
                                 List<String> affiliations;
+                                List<String> masters;
+                                List<String> apprentices;
+                                List<String> formerAffiliations;
+                                List<String> equipment;
+                                List<String> era;
 
                                 JSONArray jsonArrayAff = object.getJSONArray("affiliations");
 
@@ -65,6 +76,41 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 for(int j = 0; j < jsonArrayAff.length(); j++){
                                     affiliations.add(jsonArrayAff.getString(j));
                                 }
+//
+//                                JSONArray jsonArrayMast = object.getJSONArray("masters");
+//
+//                                masters = new ArrayList<>();
+//                                for(int k = 0; k < jsonArrayMast.length(); k++){
+//                                    masters.add(jsonArrayMast.getString(k));
+//                                }
+//
+//                                JSONArray jsonArrayApp = object.getJSONArray("apprentices");
+//
+//                                apprentices = new ArrayList<>();
+//                                for(int l = 0; l < jsonArrayApp.length(); l++){
+//                                    apprentices.add(jsonArrayApp.getString(l));
+//                                }
+//
+//                                JSONArray jsonArrayformer = object.getJSONArray("formerAffiliations");
+//
+//                                formerAffiliations = new ArrayList<>();
+//                                for(int m = 0; m < jsonArrayformer.length(); m++){
+//                                    formerAffiliations.add(jsonArrayformer.getString(m));
+//                                }
+//
+//                                JSONArray jsonArrayEquip = object.getJSONArray("equipment");
+//
+//                                equipment = new ArrayList<>();
+//                                for(int n = 0; n < jsonArrayEquip.length(); n++){
+//                                    equipment.add(jsonArrayEquip.getString(n));
+//                                }
+//
+//                                JSONArray jsonArrayEra = object.getJSONArray("era");
+//
+//                                era = new ArrayList<>();
+//                                for(int o = 0; o < jsonArrayEra.length(); o++){
+//                                    era.add(jsonArrayEra.getString(o));
+//                                }
 
                                 Integer id = object.getInt("id");
                                 String name = object.getString("name");
@@ -83,10 +129,6 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 String eyeColor = object.optString("eyeColor");
                                 String skinColor = object.optString("skinColor");
                                 String cybernetics = object.optString("cybernetics");
-//                                List<String> affiliations = object.getJSONArray("affiliations");
-//                                List<String> masters = object.getString("masters");
-//                                List<String> apprentices = object.getString("apprentices");
-//                                List<String> formerAffiliations = object.getString("formerAffiliations");
                                 Integer dateCreated = object.optInt("dateCreated");
                                 Integer dateDestroyed = object.optInt("dateDestroyed");
                                 String destroyedLocation = object.optString("destroyedLocation");
@@ -96,10 +138,8 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 String _class = object.optString("_class");
                                 String sensorColor = object.optString("sensorColor");
                                 String platingColor = object.optString("platingColor");
-//                                List<String> equipment = object.getString("equipment");
                                 String productLine = object.optString("productLine");
                                 String kajidic = object.optString("kajidic");
-//                                List<String> era = object.getString("era");
                                 String degree = object.optString("degree");
                                 String armament = object.optString("armament");
 
@@ -107,7 +147,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, affiliations, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
                             }
 //                            affiliations, masters, apprentices, formerAffiliations,,  era, equipment
-                            mCharacterAdapter = new CharacterAdapterActivity(Characters.this, mCharacterList);
+                            mCharacterAdapter = new CharacterAdapterActivity(mCharacterList);
                             mRecycleView.setAdapter(mCharacterAdapter);
 
                             mCharacterAdapter.setOnItemClickListener(Characters.this);
@@ -148,9 +188,9 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
         intent.putExtra("skinColor", itemClicked.getSkinColor());
         intent.putExtra("cybernetics", itemClicked.getCybernetics());
         intent.putStringArrayListExtra("affiliations", (ArrayList<String>) itemClicked.getAffiliations());
-//        intent.putExtra(EXTRA_MASTERS, itemClicked.getMasters());
-//        intent.putExtra(EXTRA_APPRENTICES, itemClicked.getApprentices());
-//        intent.putExtra (EXTRA_FORMER_AFFILIATIONS, itemClicked.getFormerAffiliations());
+        intent.putStringArrayListExtra("masters", (ArrayList<String>) itemClicked.getMasters());
+        intent.putStringArrayListExtra("apprentices", (ArrayList<String>) itemClicked.getApprentices());
+        intent.putStringArrayListExtra("formerAffiliations", (ArrayList<String>) itemClicked.getFormerAffiliations());
         intent.putExtra("dateCreated", itemClicked.getDateCreated());
         intent.putExtra("dateDestroyed", itemClicked.getDateDestroyed());
         intent.putExtra("destroyedLocation", itemClicked.getDestroyedLocation());
@@ -160,13 +200,38 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
         intent.putExtra ("_class", itemClicked.getClass_());
         intent.putExtra("sensorColor", itemClicked.getSensorColor());
         intent.putExtra("platingColor", itemClicked.getPlatingColor());
-//        intent.putExtra(EXTRA_EQUIPMENT, itemClicked.getEquipment() );
+        intent.putStringArrayListExtra("equipment", (ArrayList<String>) itemClicked.getEquipment());
         intent.putExtra ("productLine", itemClicked.getProductLine());
         intent.putExtra("kajidic", itemClicked.getKajidic());
-//        intent.putExtra(EXTRA_ERA, itemClicked.getEra());
+        intent.putStringArrayListExtra("era", (ArrayList<String>) itemClicked.getEra());
         intent.putExtra ("degree", itemClicked.getDegree());
         intent.putExtra("armament", itemClicked.getArmament());
 
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                mCharacterAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
     }
 }
