@@ -89,8 +89,8 @@ public class Datum {
      * @param dateDestroyed
      */
 
-// List<String> affiliations,
-    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor, String productLine, String kajidic, String degree, String armament) {
+//
+    public Datum(Integer id, String name, Integer height, Integer mass, String gender, String homeworld, String wiki, String image, Integer born, String bornLocation, Integer died, String diedLocation, String species, String hairColor, String eyeColor, String skinColor, String cybernetics, List<String> affiliations, Integer dateCreated, Integer dateDestroyed, String destroyedLocation, String creator, String manufacturer, String model, String _class, String sensorColor, String platingColor, String productLine, String kajidic, String degree, String armament) {
         super();
         this.id = id;
         this.name = name;
@@ -266,13 +266,13 @@ public class Datum {
         this.cybernetics = cybernetics;
     }
 
-//    public List<String> getAffiliations() {
-//        return affiliations;
-//    }
-//
-//    public void setAffiliations(List<String> affiliations) {
-//        this.affiliations = affiliations;
-//    }
+    public List<String> getAffiliations() {
+        return affiliations;
+    }
+
+    public void setAffiliations(List<String> affiliations) {
+        this.affiliations = affiliations;
+    }
 
 //    public List<String> getMasters() {
 //        return masters;

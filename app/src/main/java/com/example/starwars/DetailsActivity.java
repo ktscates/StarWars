@@ -2,62 +2,24 @@ package com.example.starwars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-//
-////import static com.example.starwars.Characters.EXTRA_AFFILIATIONS;
-////import static com.example.starwars.Characters.EXTRA_APPRENTICES;
-//import static com.example.starwars.Characters.EXTRA_ARMAMENT;
-//import static com.example.starwars.Characters.EXTRA_BORN;
-//import static com.example.starwars.Characters.EXTRA_BORN_LOCATION;
-//import static com.example.starwars.Characters.EXTRA_CLASS;
-//import static com.example.starwars.Characters.EXTRA_CREATOR;
-//import static com.example.starwars.Characters.EXTRA_CYBERNETICS;
-//import static com.example.starwars.Characters.EXTRA_DATE_CREATED;
-//import static com.example.starwars.Characters.EXTRA_DATE_DESTROYED;
-//import static com.example.starwars.Characters.EXTRA_DEGREE;
-//import static com.example.starwars.Characters.EXTRA_DESTROYED_LOCATION;
-//import static com.example.starwars.Characters.EXTRA_DIED;
-//import static com.example.starwars.Characters.EXTRA_DIED_LOCATION;
-////import static com.example.starwars.Characters.EXTRA_EQUIPMENT;
-////import static com.example.starwars.Characters.EXTRA_ERA;
-//import static com.example.starwars.Characters.EXTRA_EYECOLOR;
-////import static com.example.starwars.Characters.EXTRA_FORMER_AFFILIATIONS;
-//import static com.example.starwars.Characters.EXTRA_GENDER;
-//import static com.example.starwars.Characters.EXTRA_HAIRCOLOR;
-//import static com.example.starwars.Characters.EXTRA_HEIGHT;
-//import static com.example.starwars.Characters.EXTRA_HOMEWORLD;
-//import static com.example.starwars.Characters.EXTRA_KAJIDIC;
-//import static com.example.starwars.Characters.EXTRA_MANUFACTURER;
-//import static com.example.starwars.Characters.EXTRA_IMAGE;
-//import static com.example.starwars.Characters.EXTRA_MASS;
-////import static com.example.starwars.Characters.EXTRA_MASTERS;
-//import static com.example.starwars.Characters.EXTRA_MODEL;
-//import static com.example.starwars.Characters.EXTRA_NAME;
-//import static com.example.starwars.Characters.EXTRA_PLATINGCOLOR;
-//import static com.example.starwars.Characters.EXTRA_PRODUCTLINE;
-//import static com.example.starwars.Characters.EXTRA_SENSORCOLOR;
-//import static com.example.starwars.Characters.EXTRA_SKINCOLOR;
-//import static com.example.starwars.Characters.EXTRA_SPECIES;
-//import static com.example.starwars.Characters.EXTRA_WIKI;
-//
+import java.util.Objects;
+
 
 public class DetailsActivity extends AppCompatActivity {
-    private static final String FILE_NAME = "example.txt";
     TextView textViewCharacter;
     TextView textViewHeight;
     TextView textViewMass;
@@ -74,6 +36,7 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewEyeColor;
     TextView textViewSkinColor;
     TextView textViewCyber;
+    TextView textViewAffiliations;
     TextView textViewDateCreated;
     TextView textViewDateDestroyed;
     TextView textViewDestroyed;
@@ -88,12 +51,15 @@ public class DetailsActivity extends AppCompatActivity {
     TextView textViewDegree;
     TextView textViewArmament;
 
+    SharedPreferences sharedPreferences;
+    Button save;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        Intent intent = getIntent();
+        final Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         Integer height = intent.getIntExtra("height", 0);
         Integer mass = intent.getIntExtra("mass",0);
@@ -109,8 +75,8 @@ public class DetailsActivity extends AppCompatActivity {
         String hairColor = intent.getStringExtra("hairColor");
         String eyeColor = intent.getStringExtra("eyeColor");
         String skinColor = intent.getStringExtra("skinColor");
-        String cybenretics = intent.getStringExtra("cybernetics");
-//        List<String> affiliations = intent.getStringArrayListExtra(EXTRA_AFFILIATIONS);
+        String cybernetics = intent.getStringExtra("cybernetics");
+        List<String> affiliations = intent.getStringArrayListExtra("affialiations");
 //        String masters = intent.getStringExtra(EXTRA_MASTERS);
 //        String apprentices = intent.getStringExtra(EXTRA_APPRENTICES);
 //        String formerAffliations = intent.getStringExtra(EXTRA_FORMER_AFFILIATIONS);
@@ -146,7 +112,7 @@ public class DetailsActivity extends AppCompatActivity {
         textViewEyeColor = findViewById(R.id.eye);
         textViewSkinColor = findViewById(R.id.skin);
         textViewCyber = findViewById(R.id.cyber);
-//        TextView textViewAffiliations = findViewById(R.id.affiliations);
+        textViewAffiliations = findViewById(R.id.affiliations);
 //        TextView textViewMasters = findViewById(R.id.masters);
 //        TextView textViewApprentices = findViewById(R.id.apprentices);
 //        TextView textViewFormer = findViewById(R.id.former);
@@ -181,12 +147,34 @@ public class DetailsActivity extends AppCompatActivity {
         textViewHaircolor.setText(hairColor);
         textViewEyeColor.setText(eyeColor);
         textViewSkinColor.setText(skinColor);
-        textViewCyber.setText(cybenretics);
-//        String affiliate = "";
-//        for(int i = 0; i < affiliations.size(); i++){
-//            affiliate = affiliations.get(i) + "\n";
-//        }
-//        textViewAffiliations.setText(affiliate);
+        textViewCyber.setText(cybernetics);
+
+        StringBuilder affiliate = new StringBuilder();
+        if (affiliations != null) {
+            for (int i = 0; i < affiliations.size(); i++) {
+                affiliate.append(affiliations.get(i)).append("\n");
+            }
+        }
+        textViewAffiliations.setText("Affiliations: " + affiliate);
+        System.out.println(affiliate);
+
+
+//        @Override
+//        protected void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            setContentView(R.layout.activity_details);
+//            image=(ImageView)findViewById(R.id.image1);
+//            name=findViewById(R.id.name);
+//            aff=findViewById(R.id.affiliations);
+//            final Intent intent=getIntent();
+//            name.setText(intent.getStringExtra("name"));
+//            List<String> mList=intent.getStringArrayListExtra("aff");
+//            String affi="";
+//            for(int i=0;i<mList.size();i++){
+//
+//                affi=affi+mList.get(i)+"\n";
+//            }
+//            aff.setText(affi);
 //        textViewMasters.setText(masters);
 //        textViewApprentices.setText(apprentices);
 //        textViewFormer.setText(formerAffliations);
@@ -205,6 +193,24 @@ public class DetailsActivity extends AppCompatActivity {
 //        textViewEra.setText(era);
         textViewDegree.setText(degree);
         textViewArmament.setText(armament);
+
+        save = findViewById(R.id.save);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sharedPreferences = getSharedPreferences("com.example.starwars", Context.MODE_PRIVATE);
+                String characterName = textViewCharacter.getText().toString();
+                String characterGender = textViewGender.getText().toString();
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("characterName", characterName);
+                editor.putString("characterGender", characterGender);
+                editor.commit();
+                Toast.makeText(DetailsActivity.this, characterName + "Has been Saved", Toast.LENGTH_LONG).show();
+                System.out.println(characterName);
+                System.out.println(characterGender);
+            }
+        });
     }
 
 }

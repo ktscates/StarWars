@@ -21,42 +21,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Characters extends AppCompatActivity implements CharacterAdapterActivity.OnItemClickListener {
-//    public static final String EXTRA_NAME = "name";
-//    public static final String EXTRA_HEIGHT = "height";
-//    public static final String EXTRA_MASS = "mass";
-//    public static final String EXTRA_GENDER = "gender";
-//    public static final String EXTRA_HOMEWORLD = "homeworld";
-//    public static final String EXTRA_WIKI = "wiki";
-//    public static final String EXTRA_IMAGE = "image";
-//    public static final String EXTRA_BORN = "born";
-//    public static final String EXTRA_BORN_LOCATION = "bornLocation";
-//    public static final String EXTRA_DIED = "died";
-//    public static final String EXTRA_DIED_LOCATION = "diedLocation";
-//    public static final String EXTRA_SPECIES = "species";
-//    public static final String EXTRA_HAIRCOLOR = "hairColor";
-//    public static final String EXTRA_EYECOLOR = "eyeColor";
-//    public static final String EXTRA_SKINCOLOR = "skinColor";
-//    public static final String EXTRA_CYBERNETICS = "cybernetics";
-//    public static final String EXTRA_AFFILIATIONS = "affiliations";
-//    public static final String EXTRA_MASTERS = "masters";
-//    public static final String EXTRA_APPRENTICES = "apprentices";
-//    public static final String EXTRA_FORMER_AFFILIATIONS = "formerAffiliations";
-//    public static final String EXTRA_DATE_CREATED = "dateCreated";
-//    public static final String EXTRA_DATE_DESTROYED = "dateDestroyed";
-//    public static final String EXTRA_DESTROYED_LOCATION = "destroyedLocation";
-//    public static final String EXTRA_CREATOR = "creator";
-//    public static final String EXTRA_MANUFACTURER = "manufacturer";
-//    public static final String EXTRA_MODEL= "model";
-//    public static final String EXTRA_CLASS = "_class";
-//    public static final String EXTRA_SENSORCOLOR= "sensorColor";
-//    public static final String EXTRA_PLATINGCOLOR= "platingColor";
-////    public static final String EXTRA_EQUIPMENT = "equipment";
-//    public static final String EXTRA_PRODUCTLINE = "productLine";
-//    public static final String EXTRA_KAJIDIC = "kajidic";
-////    public static final String EXTRA_ERA= "era";
-//    public static final String EXTRA_DEGREE= "degree";
-//    public static final String EXTRA_ARMAMENT = "armament";
 
     private RecyclerView mRecycleView;
     private CharacterAdapterActivity mCharacterAdapter;
@@ -86,18 +52,19 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+
                             JSONArray jsonArray = response.getJSONArray("data");
 
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject object = jsonArray.getJSONObject(i);
-//                                List<String> affiliations = null;
-//
-//                                JSONArray jsonArrayAff = object.getJSONArray("affiliations");
-//
-//                                affiliations = new ArrayList<String>();
-//                                for(int j = 0; j < jsonArrayAff.length(); j++){
-//                                    affiliations.add(jsonArrayAff.getString(j));
-//                                }
+                                List<String> affiliations;
+
+                                JSONArray jsonArrayAff = object.getJSONArray("affiliations");
+
+                                affiliations = new ArrayList<>();
+                                for(int j = 0; j < jsonArrayAff.length(); j++){
+                                    affiliations.add(jsonArrayAff.getString(j));
+                                }
 
                                 Integer id = object.getInt("id");
                                 String name = object.getString("name");
@@ -137,7 +104,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
                                 String armament = object.optString("armament");
 
 
-                                mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
+                                mCharacterList.add(new Datum(id, name, height, mass, gender, homeworld, wiki, image, born, bornLocation, died, diedLocation, species, hairColor, eyeColor, skinColor, cybernetics, affiliations, dateCreated, dateDestroyed, destroyedLocation, creator, manufacturer, model, _class, sensorColor, platingColor, productLine, kajidic, degree, armament));
                             }
 //                            affiliations, masters, apprentices, formerAffiliations,,  era, equipment
                             mCharacterAdapter = new CharacterAdapterActivity(Characters.this, mCharacterList);
@@ -180,7 +147,7 @@ public class Characters extends AppCompatActivity implements CharacterAdapterAct
         intent.putExtra("eyeColor", itemClicked.getEyeColor());
         intent.putExtra("skinColor", itemClicked.getSkinColor());
         intent.putExtra("cybernetics", itemClicked.getCybernetics());
-//        intent.putStringArrayListExtra(EXTRA_AFFILIATIONS, (ArrayList<String>) itemClicked.getAffiliations());
+        intent.putStringArrayListExtra("affiliations", (ArrayList<String>) itemClicked.getAffiliations());
 //        intent.putExtra(EXTRA_MASTERS, itemClicked.getMasters());
 //        intent.putExtra(EXTRA_APPRENTICES, itemClicked.getApprentices());
 //        intent.putExtra (EXTRA_FORMER_AFFILIATIONS, itemClicked.getFormerAffiliations());
