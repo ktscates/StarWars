@@ -157,24 +157,6 @@ public class DetailsActivity extends AppCompatActivity {
         }
         textViewAffiliations.setText("Affiliations: " + affiliate);
         System.out.println(affiliate);
-
-
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            setContentView(R.layout.activity_details);
-//            image=(ImageView)findViewById(R.id.image1);
-//            name=findViewById(R.id.name);
-//            aff=findViewById(R.id.affiliations);
-//            final Intent intent=getIntent();
-//            name.setText(intent.getStringExtra("name"));
-//            List<String> mList=intent.getStringArrayListExtra("aff");
-//            String affi="";
-//            for(int i=0;i<mList.size();i++){
-//
-//                affi=affi+mList.get(i)+"\n";
-//            }
-//            aff.setText(affi);
 //        textViewMasters.setText(masters);
 //        textViewApprentices.setText(apprentices);
 //        textViewFormer.setText(formerAffliations);
